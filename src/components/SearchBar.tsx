@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Search, X } from "lucide-react";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Badge } from "./ui/badge";
+import { Button, TextField, TagGroup, TagList } from "@bcgov/design-system-react-components";
 
 interface SearchBarProps {
   onSearch: (query: string, tags: string[]) => void;
@@ -57,22 +55,22 @@ export function SearchBar({
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex gap-3">
           <div className="flex-1">
-            <Input
-              type="text"
-              placeholder="Search services by name or description..."
+            <TextField
+              label="Search Services"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="w-full border border-border"
+              onChange={setQuery}
+              className="w-full"
             />
           </div>
-          <Button type="submit" variant="default">
+          <Button type="submit" variant="primary" size="medium">
             <Search className="w-4 h-4 mr-2" />
             Search
           </Button>
           <Button
             type="button"
-            variant="outline"
-            onClick={handleReset}
+            variant="secondary"
+            size="medium"
+            onPress={handleReset}
           >
             <X className="w-4 h-4 mr-2" />
             Reset
@@ -81,43 +79,34 @@ export function SearchBar({
 
         <div className="space-y-2">
           <div className="flex gap-2">
-            <Input
-              type="text"
-              placeholder="Add tags to filter (press Enter)..."
+            <TextField
+              label="Add Tags"
               value={tagInput}
-              onChange={(e) => setTagInput(e.target.value)}
-              onKeyPress={handleTagKeyPress}
-              className="flex-1 border border-border"
+              onChange={setTagInput}
+              onKeyDown={handleTagKeyPress}
+              className="flex-1"
             />
             <Button
               type="button"
-              variant="outline"
-              onClick={() => addTag(tagInput)}
-              disabled={!tagInput.trim()}
+              variant="secondary"
+              size="medium"
+              onPress={() => addTag(tagInput)}
+              isDisabled={!tagInput.trim()}
             >
               Add Tag
             </Button>
           </div>
 
           {selectedTags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {selectedTags.map((tag) => (
-                <Badge
-                  key={tag}
-                  variant="secondary"
-                  className="flex items-center gap-1"
-                >
-                  {tag}
-                  <button
-                    type="button"
-                    onClick={() => removeTag(tag)}
-                    className="ml-1 hover:text-red-600"
-                  >
-                    <X className="w-3 h-3" />
-                  </button>
-                </Badge>
-              ))}
-            </div>
+            <TagGroup aria-label="Selected filter tags">
+              <TagList 
+                items={selectedTags.map(tag => ({
+                  id: tag,
+                  textValue: tag,
+                  onRemove: () => removeTag(tag)
+                }))}
+              />
+            </TagGroup>
           )}
         </div>
       </form>

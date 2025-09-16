@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ExternalLink, Tag, User } from 'lucide-react';
+import { Button } from '@bcgov/design-system-react-components';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
-import { Button } from './ui/button';
 import type { Service } from '../types/service';
 
 interface ServiceListProps {
@@ -91,11 +91,11 @@ export function ServiceList({ services, loading }: ServiceListProps) {
               </div>
             )}
             
-            <Button asChild variant="outline" className="w-full mt-auto">
-              <Link to={`/service/${service.id}`}>
+            <Link to={`/service/${service.id}`} className="w-full mt-auto">
+              <Button variant="secondary" size="medium" className="w-full">
                 View Details
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </CardContent>
         </Card>
       ))}

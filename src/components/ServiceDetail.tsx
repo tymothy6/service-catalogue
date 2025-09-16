@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, User, Tag, Bot, AlertCircle } from 'lucide-react';
+import { Button } from '@bcgov/design-system-react-components';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
-import { Button } from './ui/button';
 import { Alert, AlertDescription } from './ui/alert';
 import type { Service } from '../types/service';
 
@@ -76,12 +76,12 @@ export function ServiceDetail({ getServiceById, getRelatedServices }: ServiceDet
   if (error || !service) {
     return (
       <div className="max-w-4xl mx-auto">
-        <Button asChild variant="ghost" className="mb-6">
-          <Link to="/">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+        <Link to="/" className="mb-6 inline-block">
+          <Button variant="secondary" size="medium" className="flex items-center gap-2">
+            <ArrowLeft className="w-4 h-4" />
             Back to Services
-          </Link>
-        </Button>
+          </Button>
+        </Link>
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
@@ -97,12 +97,12 @@ export function ServiceDetail({ getServiceById, getRelatedServices }: ServiceDet
 
   return (
     <div className="max-w-4xl mx-auto">
-      <Button asChild variant="ghost" className="mb-6">
-        <Link to="/">
-          <ArrowLeft className="w-4 h-4 mr-2" />
+      <Link to="/" className="mb-6 inline-block">
+        <Button variant="secondary" size="medium" className="flex items-center gap-2">
+          <ArrowLeft className="w-4 h-4" />
           Back to Services
-        </Link>
-      </Button>
+        </Button>
+      </Link>
 
       <div className="space-y-6">
         {/* Main Service Details */}
@@ -116,17 +116,16 @@ export function ServiceDetail({ getServiceById, getRelatedServices }: ServiceDet
                   <span>Managed by {service.owner}</span>
                 </CardDescription>
               </div>
-              <Button asChild variant="outline">
-                <a
-                  href={service.docs_link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
+              <a
+                href={service.docs_link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="secondary" size="medium" className="flex items-center gap-2">
                   <ExternalLink className="w-4 h-4" />
                   Documentation
-                </a>
-              </Button>
+                </Button>
+              </a>
             </div>
           </CardHeader>
           
@@ -199,11 +198,11 @@ export function ServiceDetail({ getServiceById, getRelatedServices }: ServiceDet
                             </Badge>
                           ))}
                         </div>
-                        <Button asChild variant="ghost" size="sm">
-                          <Link to={`/service/${relatedService.id}`}>
+                        <Link to={`/service/${relatedService.id}`}>
+                          <Button variant="secondary" size="small">
                             View
-                          </Link>
-                        </Button>
+                          </Button>
+                        </Link>
                       </div>
                     </CardContent>
                   </Card>

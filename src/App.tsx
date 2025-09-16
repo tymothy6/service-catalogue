@@ -5,11 +5,10 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { Header, Footer } from "@bcgov/design-system-react-components";
 import { ServiceList } from "./components/ServiceList";
 import { ServiceDetail } from "./components/ServiceDetail";
 import { SearchBar } from "./components/SearchBar";
-import { BCHeader } from "./components/BCHeader";
-import { BCFooter } from "./components/BCFooter";
 import {
   getAllServices,
   searchServices,
@@ -102,7 +101,7 @@ export default function App() {
   return (
     <Router>
       <div className="min-h-screen bg-background flex flex-col">
-        <BCHeader />
+        <Header title="Service Catalogue" />
         <main className="container mx-auto px-4 py-8 flex-1">
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -130,7 +129,7 @@ export default function App() {
             />
           </Routes>
         </main>
-        <BCFooter />
+        <Footer />
       </div>
     </Router>
   );
